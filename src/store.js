@@ -45,7 +45,7 @@ class Store {
     let time = new Date().getUTCMilliseconds();
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: time, title: 'Новая запись'}]
+      list: [...this.state.list, {code: time, title: 'Новая запись', counter: 0, counter_text: ''}]
     })
   };
 

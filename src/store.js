@@ -69,13 +69,14 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
-          item.selected = !item.selected;
-          item.counter = item.counter + 1;
+          if (!item.selected) {
+          item.counter = item.counter + 1}
           if ((item.counter == 2) || (item.counter == 3) || (item.counter == 4)) {
             item.counter_text = `Выделяли ${item.counter} раза`;
           } else if (item.counter != 2 ) {
             item.counter_text = `Выделяли ${item.counter} раз`
           }
+          item.selected = !item.selected;
         } else {
           item.selected = false;
         }

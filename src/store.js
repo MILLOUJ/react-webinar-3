@@ -42,9 +42,10 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    let time = new Date().getUTCMilliseconds();
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, {code: time, title: 'Новая запись'}]
     })
   };
 
@@ -69,6 +70,14 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+          item.counter = item.counter + 1;
+          if ((item.counter == 2) || (item.counter == 3) || (item.counter == 4)) {
+            item.counter_text = `Выделяли ${item.counter} раза`;
+          } else if (item.counter != 2 ) {
+            item.counter_text = `Выделяли ${item.counter} раз`
+          }
+        } else {
+          item.selected = false;
         }
         return item;
       })

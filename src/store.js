@@ -5,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.newId = initState.list.length;
   }
 
   /**
@@ -38,14 +39,18 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
+  // Генерация нового id
+  createNewId() {
+    return ++this.newId;
+  }
+
   /**
    * Добавление новой записи
    */
   addItem() {
-    let time = new Date().getUTCMilliseconds();
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: time, title: 'Новая запись', counter: 0, counter_text: ''}]
+      list: [...this.state.list, {code: this.createNewId(), title: 'Новая запись', counter: 0, counter_text: '' }]
     })
   };
 
@@ -70,10 +75,11 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           if (!item.selected) {
-          item.counter = item.counter + 1}
+            item.counter = item.counter++
+          }
           if ((item.counter == 2) || (item.counter == 3) || (item.counter == 4)) {
             item.counter_text = `Выделяли ${item.counter} раза`;
-          } else if (item.counter != 2 ) {
+          } else if (item.counter != 2) {
             item.counter_text = `Выделяли ${item.counter} раз`
           }
           item.selected = !item.selected;

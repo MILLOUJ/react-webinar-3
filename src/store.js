@@ -76,9 +76,9 @@ class Store {
         if (item.code === code) {
           !item.selected ? item.counter++ : 0;
           if ((item.counter == 2) || (item.counter == 3) || (item.counter == 4)) {
-            item.counter_text = `Выделяли ${item.counter} раза`;
+            item.counter_text = ` | Выделяли ${item.counter} раза`;
           } else if (item.counter != 2) {
-            item.counter_text = `Выделяли ${item.counter} раз`
+            item.counter_text = ` | Выделяли ${item.counter} раз`
           }
           item.selected = !item.selected;
         } else {
